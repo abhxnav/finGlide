@@ -22,7 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontRedHat.variable} antialiased`}>{children}</body>
+      <body
+        className={`${fontRedHat.variable} antialiased bg-dark-600 font-redHat`}
+      >
+        {children}
+      </body>
     </html>
   )
 }
