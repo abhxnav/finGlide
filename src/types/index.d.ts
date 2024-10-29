@@ -46,3 +46,7 @@ declare interface DoughnutChartProps {
 declare interface LeftSidebarProps {
   user: User
 }
+
+declare interface MobileNavbarProps {
+  user: User
+}
