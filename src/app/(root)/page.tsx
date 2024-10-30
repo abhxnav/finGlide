@@ -1,7 +1,11 @@
-import { Header, TotalBalance } from '@/components'
+import { Header, RightSidebar, TotalBalance } from '@/components'
 
 const Home = () => {
-  const loggedIn = { firstName: 'Abhinav' }
+  const loggedIn = {
+    firstName: 'Abhinav',
+    lastName: 'Kashyap',
+    email: 'abhinav@gmail.com',
+  }
 
   return (
     <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll">
@@ -20,7 +24,15 @@ const Home = () => {
             totalCurrentBalance={2647.46}
           />
         </header>
+
+        {/* TODO: Add recent transactions section */}
       </div>
+
+      <RightSidebar
+        user={loggedIn}
+        transactions={[]}
+        banks={[{ currentBalance: 1234.56 }, { currentBalance: 4567.89 }]}
+      />
     </section>
   )
 }

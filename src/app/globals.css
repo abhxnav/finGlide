@@ -73,6 +73,10 @@ body {
   }
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .no-scrollbar {
   -ms-overflow-style: none;
   /* IE and Edge */
@@ -85,4 +89,34 @@ body {
   background: linear-gradient(135deg, hsla(158, 42%, 75%, 1) 50%, hsla(198, 26%, 75%, 1) 80%);
   background: -moz-linear-gradient(135deg, hsla(158, 42%, 75%, 1) 50%, hsla(198, 26%, 75%, 1) 80%);
   background: -webkit-linear-gradient(135deg, hsla(158, 42%, 75%, 1) 50%, hsla(198, 26%, 75%, 1) 80%);
+}
+
+.profile-gradient {
+  background: linear-gradient(135deg, #7FC9AD 0%, #6AA8BC 25%, #B596C6 50%, #7FC9AD 75%, #6AA8BC 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+
+.debit-card-gradient {
+  background: linear-gradient(135deg, #7FC9AD 25%, #6AA8BC 50%, #B596C6 75%);
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.debit-card-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='4' fill='%23FFFFFF' opacity='0.1'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.05;
 }

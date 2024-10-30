@@ -50,3 +50,15 @@ declare interface LeftSidebarProps {
 declare interface MobileNavbarProps {
   user: User
 }
+
+declare interface RightSidebarProps {
+  user: User
+  transactions: any
+  banks: any
+}
+
+declare interface DebitCardProps {
+  account: Account
+  userName: string
+  showBalance?: boolean
+}
