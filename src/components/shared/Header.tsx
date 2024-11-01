@@ -1,3 +1,5 @@
+import { HeaderProps } from '@/types'
+
 const Header = ({ type = 'title', title, subtext, user }: HeaderProps) => {
   return (
     <div className="flex flex-col gap-1">

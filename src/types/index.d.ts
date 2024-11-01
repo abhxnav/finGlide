@@ -1,3 +1,6 @@
+import { Control } from 'react-hook-form'
+import { authSchema } from '@/lib/validation'
+
 declare type Account = {
   id: string
   availableBalance: number
@@ -61,4 +64,13 @@ declare interface DebitCardProps {
   account: Account
   userName: string
   showBalance?: boolean
+}
+
+const authFormSchema = authSchema('sign-up')
+declare interface CustomFormFieldProps {
+  control: Control<z.infer<typeof authFormSchema>>
+  name: string
+  label: string
+  placeholder: string
+  type: 'text' | 'email' | 'password'
 }

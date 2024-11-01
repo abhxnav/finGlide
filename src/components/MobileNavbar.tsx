@@ -3,6 +3,7 @@
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui'
 import { sidebarLinks } from '@/constants'
 import { cn } from '@/lib/utils'
+import { MobileNavbarProps } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'

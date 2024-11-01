@@ -1,4 +1,5 @@
 import { CounterAnimation, DoughnutChart } from '@/components'
+import { TotalBalanceProps } from '@/types'
 
 const TotalBalance = ({
   accounts = [],
