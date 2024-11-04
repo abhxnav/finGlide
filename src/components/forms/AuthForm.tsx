@@ -10,8 +10,12 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { authSchema } from '@/lib/validation'
 import { Loader2 } from 'lucide-react'
+import { signUp, signIn } from '@/actions/user.actions'
+import { useRouter } from 'next/navigation'
 
 const AuthForm = ({ type }: { type: 'sign-in' | 'sign-up' }) => {
+  const router = useRouter()
+
   const [user, setUser] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -19,16 +23,42 @@ const AuthForm = ({ type }: { type: 'sign-in' | 'sign-up' }) => {
 
   const form = useForm<z.infer<typeof authFormSchema>>({
     resolver: zodResolver(authFormSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues:
+      type === 'sign-in'
+        ? { email: '', password: '' }
+        : {
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            address1: '',
+            city: '',
+            state: '',
+            postalCode: '',
+            dob: '',
+            ssn: '',
+          },
   })
 
-  const onSubmit = (values: z.infer<typeof authFormSchema>) => {
+  const onSubmit = async (values: z.infer<typeof authFormSchema>) => {
     setIsLoading(true)
-    console.log(values)
-    setIsLoading(false)
+
+    try {
+      if (type === 'sign-up') {
+        const newUser = await signUp(values)
+        setUser(newUser)
+      } else if (type === 'sign-in') {
+        const res = await signIn({
+          email: values.email,
+          password: values.password,
+        })
+        if (res) router.push('/')
+      }
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -85,6 +115,13 @@ const AuthForm = ({ type }: { type: 'sign-in' | 'sign-up' }) => {
                     name="address1"
                     label="Address"
                     placeholder="Enter your address"
+                  />
+                  <CustomFormField
+                    control={form.control}
+                    type="text"
+                    name="city"
+                    label="City"
+                    placeholder="Enter your city"
                   />
                   <div className="flex gap-4">
                     <CustomFormField

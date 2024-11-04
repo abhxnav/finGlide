@@ -6,6 +6,7 @@ import { LeftSidebarProps } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { SidebarFooter } from '@/components'
 
 const LeftSidebar = ({ user }: LeftSidebarProps) => {
   const pathname = usePathname()
@@ -66,7 +67,7 @@ const LeftSidebar = ({ user }: LeftSidebarProps) => {
         {/* TODO: Add user details */}
       </nav>
 
-      {/* TODO: Add footer */}
+      <SidebarFooter user={user} />
     </section>
   )
 }

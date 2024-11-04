@@ -1,11 +1,8 @@
+import { getLoggedInUser } from '@/actions/user.actions'
 import { Header, RightSidebar, TotalBalance } from '@/components'
 
-const Home = () => {
-  const loggedIn = {
-    firstName: 'Abhinav',
-    lastName: 'Kashyap',
-    email: 'abhinav@gmail.com',
-  }
+const Home = async () => {
+  const loggedIn = await getLoggedInUser()
 
   return (
     <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll">
@@ -15,7 +12,7 @@ const Home = () => {
             type="greeting"
             title="Welcome"
             subtext="Access and manage your account and transactions efficiently."
-            user={loggedIn?.firstName || 'Guest'}
+            user={loggedIn?.name || 'Guest'}
           />
 
           <TotalBalance

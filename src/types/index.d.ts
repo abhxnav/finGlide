@@ -29,6 +29,22 @@ declare type User = {
   dateOfBirth: string
 }
 
+declare type SignInParams = {
+  email: string
+  password: string
+}
+
+declare type SignUpParams = SignInParams & {
+  firstName?: string
+  lastName?: string
+  address1?: string
+  city?: string
+  state?: string
+  postalCode?: string
+  dateOfBirth?: string
+  ssn?: string
+}
+
 declare interface HeaderProps {
   type?: 'title' | 'greeting'
   title: string
@@ -64,6 +80,11 @@ declare interface DebitCardProps {
   account: Account
   userName: string
   showBalance?: boolean
+}
+
+declare interface FooterProps {
+  user: User
+  type?: 'desktop' | 'mobile'
 }
 
 const authFormSchema = authSchema('sign-up')

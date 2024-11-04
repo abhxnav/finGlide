@@ -15,3 +15,12 @@ export const formatAmount = (amount: number): string => {
 
   return formatter.format(amount)
 }
+
+export const parseStringify = (value: any) => {
+  try {
+    return JSON.parse(JSON.stringify(value))
+  } catch (error) {
+    console.error('Error parsing JSON:', error)
+    return null
+  }
+}

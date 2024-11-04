@@ -26,6 +26,7 @@ const CustomFormField = ({
           <div className="flex flex-col gap-2 w-full">
             <FormControl>
               <Input
+                id={`${name}-form-item`}
                 type={type}
                 placeholder={placeholder}
                 className="text-base placeholder:text-sm rounded-lg border border-light-muted text-light-primary placeholder:text-light-muted px-4 py-6"
