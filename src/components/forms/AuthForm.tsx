@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { z } from 'zod'
 import { Button, Form } from '@/components/ui'
-import { CustomFormField } from '@/components'
+import { CustomFormField, PlaidLink } from '@/components'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { authSchema } from '@/lib/validation'
@@ -35,7 +35,7 @@ const AuthForm = ({ type }: { type: 'sign-in' | 'sign-up' }) => {
             city: '',
             state: '',
             postalCode: '',
-            dob: '',
+            dateOfBirth: '',
             ssn: '',
           },
   })
@@ -45,7 +45,21 @@ const AuthForm = ({ type }: { type: 'sign-in' | 'sign-up' }) => {
 
     try {
       if (type === 'sign-up') {
-        const newUser = await signUp(values)
+        const userData = {
+          firstName: values.firstName!,
+          lastName: values.lastName!,
+          address1: values.address1!,
+          city: values.city!,
+          state: values.state!,
+          postalCode: values.postalCode!,
+          dateOfBirth: values.dateOfBirth!,
+          ssn: values.ssn!,
+          email: values.email,
+          password: values.password,
+        }
+
+        const newUser = await signUp(userData)
+
         setUser(newUser)
       } else if (type === 'sign-in') {
         const res = await signIn({
@@ -86,7 +100,9 @@ const AuthForm = ({ type }: { type: 'sign-in' | 'sign-up' }) => {
       </header>
 
       {user ? (
-        <div className="flex flex-col gap-4"></div>
+        <div className="flex flex-col gap-4">
+          <PlaidLink user={user} variant="primary" />
+        </div>
       ) : (
         <>
           <Form {...form}>
@@ -143,7 +159,7 @@ const AuthForm = ({ type }: { type: 'sign-in' | 'sign-up' }) => {
                     <CustomFormField
                       control={form.control}
                       type="text"
-                      name="dob"
+                      name="dateOfBirth"
                       label="Date of Birth"
                       placeholder="YYYY / MM / DD"
                     />

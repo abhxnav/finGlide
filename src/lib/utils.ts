@@ -24,3 +24,14 @@ export const parseStringify = (value: any) => {
     return null
   }
 }
+
+export const encrypt = (value: string) => btoa(value)
+
+export const decrypt = (value: string) => atob(value)
+
+export const extractCustomerIdFromUrl = (url: string) => {
+  const parts = url.split('/')
+  const customerId = parts[parts.length - 1]
+
+  return customerId
+}

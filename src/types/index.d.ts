@@ -27,6 +27,8 @@ declare type User = {
   state: string
   postalCode: string
   dateOfBirth: string
+  dwollaCustomerUrl: string
+  dwollaCustomerId: string
 }
 
 declare type SignInParams = {
@@ -35,14 +37,19 @@ declare type SignInParams = {
 }
 
 declare type SignUpParams = SignInParams & {
-  firstName?: string
-  lastName?: string
-  address1?: string
-  city?: string
-  state?: string
-  postalCode?: string
-  dateOfBirth?: string
-  ssn?: string
+  firstName: string
+  lastName: string
+  address1: string
+  city: string
+  state: string
+  postalCode: string
+  dateOfBirth: string
+  ssn: string
+}
+
+declare interface ExchangePublicTokenParams {
+  publicToken: string
+  user: User
 }
 
 declare interface HeaderProps {
@@ -85,6 +92,52 @@ declare interface DebitCardProps {
 declare interface FooterProps {
   user: User
   type?: 'desktop' | 'mobile'
+}
+
+declare interface PlaidLinkProps {
+  user: User
+  variant?: 'primary' | 'ghost'
+}
+
+declare interface CreateFundingSourceOptions {
+  customerId: string
+  fundingSourceName: string
+  plaidToken: string
+  _links: object
+}
+
+declare type NewDwollaCustomerParams = {
+  firstName: string
+  lastName: string
+  email: string
+  type: string
+  address1: string
+  city: string
+  state: string
+  postalCode: string
+  dateOfBirth: string
+  ssn: string
+}
+
+declare type TransferParams = {
+  sourceFundingSourceUrl: string
+  destinationFundingSourceUrl: string
+  amount: string
+}
+
+declare type AddFundingSourceParams = {
+  dwollaCustomerId: string
+  processorToken: string
+  bankName: string
+}
+
+declare interface createBankAccountParams {
+  accessToken: string
+  userId: string
+  accountId: string
+  bankId: string
+  fundingSourceUrl: string
+  shareableId: string
 }
 
 const authFormSchema = authSchema('sign-up')

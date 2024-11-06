@@ -4,6 +4,7 @@ export { default as MobileNavbar } from '@/components/MobileNavbar'
 export { default as RightSidebar } from '@/components/RightSidebar'
 export { default as DebitCard } from '@/components/DebitCard'
 export { default as AuthAnimation } from '@/components/AuthAnimation'
+export { default as PlaidLink } from '@/components/PlaidLink'
 
 // =========== Shared ===========
 export { default as Header } from '@/components/shared/Header'

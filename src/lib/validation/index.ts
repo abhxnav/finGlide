@@ -61,7 +61,7 @@ const authSchema = (type: 'sign-up' | 'sign-in') => {
         .string()
         .min(3, { message: 'Postal code must be between 3 and 6 characters.' })
         .max(6, { message: 'Postal code must be between 3 and 6 characters.' }),
-      dob: dobField,
+      dateOfBirth: dobField,
       ssn: z.string().length(9, { message: 'Enter a valid SSN.' }),
     })
   }
@@ -81,7 +81,7 @@ const authSchema = (type: 'sign-up' | 'sign-in') => {
       .min(3, { message: 'Postal code must be between 3 and 6 characters.' })
       .max(6, { message: 'Postal code must be between 3 and 6 characters.' })
       .optional(),
-    dob: dobField.optional(),
+    dateOfBirth: dobField.optional(),
     ssn: z.string().length(9, { message: 'Enter a valid SSN.' }).optional(),
   })
 }
