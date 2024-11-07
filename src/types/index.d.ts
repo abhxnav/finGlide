@@ -31,6 +31,16 @@ declare type User = {
   dwollaCustomerId: string
 }
 
+declare type Bank = {
+  $id: string
+  accountId: string
+  bankId: string
+  accessToken: string
+  fundingSourceUrl: string
+  userId: string
+  shareableId: string
+}
+
 declare type SignInParams = {
   email: string
   password: string
@@ -138,6 +148,31 @@ declare interface createBankAccountParams {
   bankId: string
   fundingSourceUrl: string
   shareableId: string
+}
+
+declare interface GetBanksParams {
+  userId: string
+}
+
+declare interface GetBankParams {
+  documentId: string
+}
+
+declare interface GetUserInfoParams {
+  userId: string
+}
+
+declare interface getAccountProps {
+  appwriteItemId: string
+}
+
+declare interface getTransactionsProps {
+  accessToken: string
+}
+
+declare type SearchParamProps = {
+  params: { [key: string]: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 const authFormSchema = authSchema('sign-up')

@@ -16,7 +16,9 @@ const SidebarFooter = ({ user, type = 'desktop' }: FooterProps) => {
           type === 'desktop' ? 'max-xl:hidden' : ''
         }`}
       >
-        <p className="text-xl font-bold text-accent-mint">{user?.name[0]}</p>
+        <p className="text-xl font-bold text-accent-mint">
+          {user?.firstName[0]}
+        </p>
       </div>
 
       <div
@@ -25,7 +27,7 @@ const SidebarFooter = ({ user, type = 'desktop' }: FooterProps) => {
         }`}
       >
         <h1 className="text-sm truncate font-semibold text-light-secondary">
-          {user?.name}
+          {user?.firstName} {user?.lastName}
         </h1>
         <h1 className="text-sm truncate font-normal text-light-muted">
           {user?.email}
