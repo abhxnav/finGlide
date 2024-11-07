@@ -2,11 +2,14 @@
 
 import { Client, Account, Databases, Users } from 'node-appwrite'
 import { cookies } from 'next/headers'
+import { envConfig } from '../../envConfig'
+
+const { appwriteEndpoint, appwriteProject, appwriteKey } = envConfig
 
 export async function createSessionClient() {
   const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!)
+    .setEndpoint(appwriteEndpoint)
+    .setProject(appwriteProject)
 
   const nextCookies = await cookies()
   const session = nextCookies.get('appwrite-session')
@@ -25,9 +28,9 @@ export async function createSessionClient() {
 
 export async function createAdminClient() {
   const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!)
-    .setKey(process.env.NEXT_APPWRITE_KEY!)
+    .setEndpoint(appwriteEndpoint)
+    .setProject(appwriteProject)
+    .setKey(appwriteKey)
 
   return {
     get account() {

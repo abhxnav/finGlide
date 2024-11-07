@@ -26,6 +26,13 @@ import {
   addFundingSource,
   createDwollaCustomer,
 } from '@/actions/dwolla.actions'
+import { envConfig } from '../../envConfig'
+
+const {
+  appwriteDatabaseId,
+  appwriteUserCollectionId,
+  appwriteBankCollectionId,
+} = envConfig
 
 export const signUp = async ({ password, ...userData }: SignUpParams) => {
   const { email, firstName, lastName } = userData
@@ -54,8 +61,8 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
     const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl)
 
     const newUser = await database.createDocument(
-      process.env.APPWRITE_DATABASE_ID!,
-      process.env.APPWRITE_USER_COLLECTION_ID!,
+      appwriteDatabaseId,
+      appwriteUserCollectionId,
       ID.unique(),
       {
         ...userData,
@@ -87,8 +94,8 @@ const getUserInfo = async ({ userId }: GetUserInfoParams) => {
     const { database } = await createAdminClient()
 
     const user = await database.listDocuments(
-      process.env.APPWRITE_DATABASE_ID!,
-      process.env.APPWRITE_USER_COLLECTION_ID!,
+      appwriteDatabaseId!,
+      appwriteUserCollectionId!,
       [Query.equal('userId', [userId])]
     )
 
@@ -180,8 +187,8 @@ const createBankAccount = async ({
     const { database } = await createAdminClient()
 
     const bankAccount = await database.createDocument(
-      process.env.APPWRITE_DATABASE_ID!,
-      process.env.APPWRITE_BANK_COLLECTION_ID!,
+      appwriteDatabaseId!,
+      appwriteBankCollectionId!,
       ID.unique(),
       {
         userId,
@@ -256,8 +263,8 @@ export const getBanks = async ({ userId }: GetBanksParams) => {
     const { database } = await createAdminClient()
 
     const banks = await database.listDocuments(
-      process.env.APPWRITE_DATABASE_ID!,
-      process.env.APPWRITE_BANK_COLLECTION_ID!,
+      appwriteDatabaseId!,
+      appwriteBankCollectionId!,
       [Query.equal('userId', [userId])]
     )
 
@@ -272,8 +279,8 @@ export const getBank = async ({ documentId }: GetBankParams) => {
     const { database } = await createAdminClient()
 
     const bank = await database.listDocuments(
-      process.env.APPWRITE_DATABASE_ID!,
-      process.env.APPWRITE_BANK_COLLECTION_ID!,
+      appwriteDatabaseId!,
+      appwriteBankCollectionId!,
       [Query.equal('$id', [documentId])]
     )
 
