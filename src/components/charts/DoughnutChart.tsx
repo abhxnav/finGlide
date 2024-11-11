@@ -3,6 +3,7 @@
 import { Chart as ChartJS, ArcElement, Legend, Tooltip } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 import { DoughnutChartProps } from '@/types'
+import { getDoughnutChartColors } from '@/lib/utils'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -15,7 +16,7 @@ const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
       {
         lebel: 'Banks',
         data: accountBalances,
-        backgroundColor: ['#7FC9AD', '#6AA8BC', '#B596C6'],
+        backgroundColor: getDoughnutChartColors(accountNames?.length),
       },
     ],
     labels: accountNames,

@@ -5,6 +5,10 @@ export { default as RightSidebar } from '@/components/RightSidebar'
 export { default as DebitCard } from '@/components/DebitCard'
 export { default as AuthAnimation } from '@/components/AuthAnimation'
 export { default as PlaidLink } from '@/components/PlaidLink'
+export { default as RecentTransactions } from '@/components/RecentTransactions'
+export { default as BankTabItem } from '@/components/BankTabItem'
+export { default as BankInfo } from '@/components/BankInfo'
+export { default as CategoryBadge } from '@/components/CategoryBadge'
 
 // =========== Shared ===========
 export { default as Header } from '@/components/shared/Header'
@@ -17,3 +21,6 @@ export { default as DoughnutChart } from '@/components/charts/DoughnutChart'
 
 // =========== Forms ===========
 export { default as AuthForm } from '@/components/forms/AuthForm'
+
+// =========== Tables ==========
+export { default as TransactionsTable } from '@/components/tables/TransactionsTable'

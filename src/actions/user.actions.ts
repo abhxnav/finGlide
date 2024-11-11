@@ -283,7 +283,6 @@ export const getBank = async ({ documentId }: GetBankParams) => {
       appwriteBankCollectionId!,
       [Query.equal('$id', [documentId])]
     )
-
     return parseStringify(bank.documents[0])
   } catch (error) {
     console.error(error)

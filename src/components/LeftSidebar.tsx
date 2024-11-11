@@ -6,7 +6,7 @@ import { LeftSidebarProps } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { SidebarFooter } from '@/components'
+import { PlaidLink, SidebarFooter } from '@/components'
 
 const LeftSidebar = ({ user }: LeftSidebarProps) => {
   const pathname = usePathname()
@@ -64,7 +64,7 @@ const LeftSidebar = ({ user }: LeftSidebarProps) => {
           )
         })}
 
-        {/* TODO: Add user details */}
+        <PlaidLink user={user} />
       </nav>
 
       <SidebarFooter user={user} />

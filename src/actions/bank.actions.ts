@@ -2,9 +2,17 @@
 
 import { parseStringify } from '@/lib/utils'
 import { plaidClient } from '@/server/plaid'
-import { Account, Bank, getAccountProps, getInstitutionProps } from '@/types'
+import {
+  Account,
+  Bank,
+  getAccountProps,
+  getInstitutionProps,
+  getTransactionsProps,
+  Transaction,
+} from '@/types'
 import { getBank, getBanks } from '@/actions/user.actions'
 import { CountryCode } from 'plaid'
+import { getTransactionsByBankId } from '@/actions/transaction.action'
 
 export const getAccounts = async ({ userId }: { userId: string }) => {
   try {
@@ -76,6 +84,26 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
       institutionId: accountsResponse.data.item.institution_id!,
     })
 
+    const transferTransactionsData = await getTransactionsByBankId({
+      bankId: bank.$id,
+    })
+
+    const transactions = await getTransactions({
+      accessToken: bank?.accessToken,
+    })
+
+    const transferTransactions = transferTransactionsData.documents.map(
+      (transferData: Transaction) => ({
+        id: transferData.$id,
+        name: transferData.name!,
+        amount: transferData.amount!,
+        date: transferData.$createdAt,
+        paymentChannel: transferData.channel,
+        category: transferData.category,
+        type: transferData.senderBankId === bank.$id ? 'debit' : 'credit',
+      })
+    )
+
     const account = {
       id: accountData.account_id,
       availableBalance: accountData.balances.available!,
@@ -89,9 +117,16 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
       appwriteItemId: bank.$id,
     }
 
-    return parseStringify({ data: account })
+    const allTransactions = [...transactions, ...transferTransactions].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+
+    return parseStringify({
+      data: account,
+      transactions: allTransactions,
+    })
   } catch (error) {
-    console.error('An error occurred while getting the account:', error)
+    console.error('Error getting account:', error)
   }
 }
 
@@ -109,5 +144,41 @@ export const getInstitution = async ({
     return parseStringify(intitution)
   } catch (error) {
     console.error('Error getting the institution:', error)
+  }
+}
+
+export const getTransactions = async ({
+  accessToken,
+}: getTransactionsProps) => {
+  let hasMore = true
+  let transactions: any = []
+
+  try {
+    while (hasMore) {
+      const response = await plaidClient.transactionsSync({
+        access_token: accessToken,
+      })
+
+      const data = response.data
+
+      transactions = response.data.added.map((transaction) => ({
+        id: transaction.transaction_id,
+        name: transaction.name,
+        paymentChannel: transaction.payment_channel,
+        type: transaction.payment_channel,
+        accountId: transaction.account_id,
+        amount: transaction.amount,
+        pending: transaction.pending,
+        category: transaction.category ? transaction.category[0] : '',
+        date: transaction.date,
+        image: transaction.logo_url,
+      }))
+
+      hasMore = data.has_more
+    }
+
+    return parseStringify(transactions)
+  } catch (error) {
+    console.error('error getting transactions:', error)
   }
 }

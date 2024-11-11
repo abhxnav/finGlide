@@ -41,6 +41,24 @@ declare type Bank = {
   shareableId: string
 }
 
+declare type Transaction = {
+  id: string
+  $id: string
+  name: string
+  paymentChannel: string
+  type: string
+  accountId: string
+  amount: number
+  pending: boolean
+  category: string
+  date: string
+  image: string
+  $createdAt: string
+  channel: string
+  senderBankId: string
+  receiverBankId: string
+}
+
 declare type SignInParams = {
   email: string
   password: string
@@ -168,6 +186,57 @@ declare interface getAccountProps {
 
 declare interface getTransactionsProps {
   accessToken: string
+}
+
+declare interface getInstitutionProps {
+  institutionId: string
+}
+
+declare interface getTransactionsByBankIdParams {
+  bankId: string
+}
+
+declare interface getTransactionsProps {
+  accessToken: string
+}
+
+declare interface RecentTransactionsProps {
+  accounts: Account[]
+  transactions: Transaction[]
+  appwriteItemId: string
+  page: number
+}
+
+declare interface BankTabItemProps {
+  account: Account
+  appwriteItemId?: string
+}
+
+interface UrlQueryParams {
+  params: string
+  key: string
+  value: string
+}
+
+declare type AccountTypes =
+  | 'depository'
+  | 'credit'
+  | 'loan '
+  | 'investment'
+  | 'other'
+
+declare interface BankInfoProps {
+  account: Account
+  appwriteItemId?: string
+  type: 'full' | 'card'
+}
+
+declare interface TransactionsTableProps {
+  transactions: Transaction[]
+}
+
+declare interface CategoryBadgeProps {
+  category: string
 }
 
 declare type SearchParamProps = {
