@@ -2,6 +2,7 @@ import { formatAmount } from '@/lib/utils'
 import { DebitCardProps } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CopyShareableId } from '@/components'
 
 const DebitCard = ({
   account,
@@ -11,10 +12,10 @@ const DebitCard = ({
   return (
     <div className="flex flex-col">
       <Link
-        href="/"
-        className="relative flex justify-between w-full max-w-80 h-48 rounded-2xl border border-dark-400 backdrop-blur-sm debit-card-gradient"
+        href={`/transaction-history/?id=${account?.appwriteItemId}`}
+        className="relative flex justify-between w-full max-w-80 h-48 rounded-2xl border border-dark-400 backdrop-blur-sm debit-card-gradient min-w-[325px]"
       >
-        <div className="flex flex-col justify-between z-10 size-full max-w-56 rounded-l-2xl debit-card-gradient px-5 pb-4 pt-5 relative">
+        <div className="flex flex-col justify-between z-10 size-full w-[75%] rounded-l-2xl debit-card-gradient px-5 pb-4 pt-5 relative">
           <div>
             <h1 className="text-base font-semibold text-dark-500">
               {account.name || userName}
@@ -36,12 +37,12 @@ const DebitCard = ({
             <p className="text-sm font-semibold tracking-[2px] text-dark-500">
               &#9679;&#9679;&#9679;&#9679; &#9679;&#9679;&#9679;&#9679;
               &#9679;&#9679;&#9679;&#9679;{' '}
-              <span className="text-base"> 1234</span>
+              <span className="text-base"> {account?.mask}</span>
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col items-end justify-between flex-1 size-full rounded-r-2xl bg-accent-slate py-5 pr-5">
+        <div className="flex flex-col items-end justify-between flex-1 size-full rounded-r-2xl bg-accent-slate py-5 pr-5 w-[25%]">
           <Image src="/assets/icons/nfc.svg" alt="nfc" width={25} height={25} />
           <Image
             src="/assets/icons/mastercard.svg"
@@ -52,6 +53,8 @@ const DebitCard = ({
           />
         </div>
       </Link>
+
+      {showBalance && <CopyShareableId title={account?.shareableId} />}
     </div>
   )
 }

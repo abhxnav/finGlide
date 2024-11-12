@@ -5,7 +5,7 @@ import { RightSidebarProps } from '@/types'
 
 const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
   return (
-    <aside className="no-scrollbar hidden h-screen max-h-screen flex-col border-l border-dark-400 xl:flex w-[355px] xl:overflow-y-scroll">
+    <aside className="no-scrollbar hidden h-screen max-h-screen flex-col border-l border-dark-400 xl:flex w-[400px] xl:overflow-y-scroll">
       {/* Profile */}
       <section className="flex flex-col pb-8">
         <div className="h-32 w-full profile-gradient bg-cover bg-no-repeat" />
@@ -43,7 +43,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
         </div>
 
         {banks?.length > 0 && (
-          <div className="flex flex-col items-center justify-center flex-1 gap-5 relative">
+          <div className="relative">
             <div className="relative z-10">
               <DebitCard
                 key={banks[0].$id}
@@ -53,7 +53,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
               />
             </div>
             {banks[1] && (
-              <div className="absolute top-8 right-0 w-[90%] z-0">
+              <div className="absolute top-8 left-7 w-full z-0">
                 <DebitCard
                   key={banks[1].$id}
                   account={banks[1]}

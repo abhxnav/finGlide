@@ -9,6 +9,7 @@ export { default as RecentTransactions } from '@/components/RecentTransactions'
 export { default as BankTabItem } from '@/components/BankTabItem'
 export { default as BankInfo } from '@/components/BankInfo'
 export { default as CategoryBadge } from '@/components/CategoryBadge'
+export { default as CopyShareableId } from '@/components/CopyShareableId'
 
 // =========== Shared ===========
 export { default as Header } from '@/components/shared/Header'
