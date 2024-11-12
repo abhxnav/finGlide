@@ -68,7 +68,7 @@ const TransactionsTable = ({ transactions }: TransactionsTableProps) => {
               </TableCell>
 
               <TableCell className="text-light-secondary pl-2 pr-10">
-                <CategoryBadge category={'Processing'} />
+                <CategoryBadge category={status} />
               </TableCell>
 
               <TableCell className="text-light-secondary pl-2 pr-10 min-w-32">
