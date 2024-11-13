@@ -10,6 +10,7 @@ export { default as BankTabItem } from '@/components/BankTabItem'
 export { default as BankInfo } from '@/components/BankInfo'
 export { default as CategoryBadge } from '@/components/CategoryBadge'
 export { default as CopyShareableId } from '@/components/CopyShareableId'
+export { default as BankDropdown } from '@/components/BankDropdown'
 
 // =========== Shared ===========
 export { default as Header } from '@/components/shared/Header'
@@ -22,6 +23,7 @@ export { default as DoughnutChart } from '@/components/charts/DoughnutChart'
 
 // =========== Forms ===========
 export { default as AuthForm } from '@/components/forms/AuthForm'
+export { default as PaymentTransferForm } from '@/components/forms/PaymentTransferForm'
 
 // =========== Tables ==========
 export { default as TransactionsTable } from '@/components/tables/TransactionsTable'

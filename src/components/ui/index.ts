@@ -40,3 +40,18 @@ export {
   TableCell,
   TableCaption,
 } from '@/components/ui/table'
+
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from '@/components/ui/select'
+
+export { Textarea } from '@/components/ui/textarea'

@@ -196,6 +196,20 @@ declare interface getTransactionsByBankIdParams {
   bankId: string
 }
 
+declare interface getBankByAccountIdParams {
+  accountId: string
+}
+
+declare interface CreateTransactionParams {
+  name: string
+  amount: string
+  senderId: string
+  senderBankId: string
+  receiverId: string
+  receiverBankId: string
+  email: string
+}
+
 declare interface getTransactionsProps {
   accessToken: string
 }
@@ -237,6 +251,16 @@ declare interface TransactionsTableProps {
 
 declare interface CategoryBadgeProps {
   category: string
+}
+
+declare interface PaymentTransferFormProps {
+  accounts: Account[]
+}
+
+declare interface BankDropdownProps {
+  accounts: Account[]
+  setValue?: UseFormSetValue<any>
+  className?: string
 }
 
 declare type SearchParamProps = {

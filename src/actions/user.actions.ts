@@ -6,6 +6,7 @@ import { plaidClient } from '@/server/plaid'
 import {
   createBankAccountParams,
   ExchangePublicTokenParams,
+  getBankByAccountIdParams,
   GetBankParams,
   GetBanksParams,
   GetUserInfoParams,
@@ -85,7 +86,6 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
     return parseStringify(newUser)
   } catch (error) {
     console.error('Error signing up: ', error)
-    return null
   }
 }
 
@@ -123,7 +123,6 @@ export const signIn = async ({ email, password }: SignInParams) => {
     return parseStringify(user)
   } catch (error) {
     console.error('Error signing in: ', error)
-    return null
   }
 }
 
@@ -137,6 +136,7 @@ export const getLoggedInUser = async () => {
     return parseStringify(user)
   } catch (error: any) {
     console.error('Error getting logged in user: ', error)
+    return null
   }
 }
 
@@ -161,8 +161,11 @@ export const createPlaidLinkToken = async (user: User) => {
       user: {
         client_user_id: user?.$id,
       },
-      client_name: `${user?.firstName} ${user?.lastName}`,
-      products: ['auth'] as Products[],
+      client_name: `FinGlide`,
+      products: ['auth', 'transactions'] as Products[],
+      transactions: {
+        days_requested: 730,
+      },
       language: 'en',
       country_codes: ['US'] as CountryCode[],
     }
@@ -286,5 +289,25 @@ export const getBank = async ({ documentId }: GetBankParams) => {
     return parseStringify(bank.documents[0])
   } catch (error) {
     console.error(error)
+  }
+}
+
+export const getBankByAccountId = async ({
+  accountId,
+}: getBankByAccountIdParams) => {
+  try {
+    const { database } = await createAdminClient()
+
+    const bank = await database.listDocuments(
+      appwriteDatabaseId,
+      appwriteBankCollectionId,
+      [Query.equal('accountId', [accountId])]
+    )
+
+    if (bank.total !== 1) return null
+
+    return parseStringify(bank.documents[0])
+  } catch (error) {
+    console.error('Error getting bank by account id: ', error)
   }
 }
