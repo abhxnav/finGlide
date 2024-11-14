@@ -263,6 +263,11 @@ declare interface BankDropdownProps {
   className?: string
 }
 
+declare interface PaginationProps {
+  page: number
+  totalPages: number
+}
+
 declare type SearchParamProps = {
   params: { [key: string]: string }
   searchParams: { [key: string]: string | string[] | undefined }

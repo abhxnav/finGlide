@@ -1,7 +1,12 @@
 import { Account, RecentTransactionsProps } from '@/types'
 import Link from 'next/link'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui'
-import { BankInfo, BankTabItem, TransactionsTable } from '@/components'
+import {
+  BankInfo,
+  BankTabItem,
+  Pagination,
+  TransactionsTable,
+} from '@/components'
 
 const RecentTransactions = ({
   accounts,
@@ -9,6 +14,17 @@ const RecentTransactions = ({
   appwriteItemId,
   page = 1,
 }: RecentTransactionsProps) => {
+  const rowsPerPage = 2
+  const totalPages = Math.ceil(transactions?.length / rowsPerPage)
+
+  const lastTransactionIndex = page * rowsPerPage
+  const firstTransactionIndex = lastTransactionIndex - rowsPerPage
+
+  const currentTransactions = transactions?.slice(
+    firstTransactionIndex,
+    lastTransactionIndex
+  )
+
   return (
     <section className="flex flex-col gap-6 w-full">
       <header className="flex items-center justify-between">
@@ -55,7 +71,13 @@ const RecentTransactions = ({
         ))}
       </Tabs>
 
-      <TransactionsTable transactions={transactions} />
+      <TransactionsTable transactions={currentTransactions} />
+
+      {totalPages > 1 && (
+        <div className="my-4 w-full">
+          <Pagination page={page} totalPages={totalPages} />
+        </div>
+      )}
     </section>
   )
 }
